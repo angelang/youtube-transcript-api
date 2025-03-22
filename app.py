@@ -1,9 +1,12 @@
+# app.py
+
 from flask import Flask, request, jsonify
-from youtube_transcript_api import YouTubeTranscriptApi
 from flask_cors import CORS
+from youtube_transcript_api import YouTubeTranscriptApi
+import os
 
 app = Flask(__name__)
-CORS(app)  # CORS 허용 (웹 연동용)
+CORS(app)
 
 @app.route('/get_transcript')
 def get_transcript():
@@ -18,8 +21,6 @@ def get_transcript():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-import os
-
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
